@@ -6,7 +6,7 @@
 </head>
 <body style="background-color: #C9ECFF;display: flex;-ms-flex-pack: center !important;justify-content: center;">
 	<div style="  position: relative;width: 100%;margin-left:30%;flex: 0 0 41.666667%;max-width: 41.666667%;background-color: #fff !important;">
-    <img style="display: block !important;width: 100% !important;" src="https://i.imgur.com/QwGdThQ.png" alt="">
+    <img style="display: block !important;width: 100% !important;" src="https://i.imgur.com/fQMYzi2.png" alt="">
 
     <div style="padding: 1rem !important;display: block !important;">
 			<h3 style="margin-top:0">
@@ -21,7 +21,7 @@
       </p>
     </div>
     <div style="background-color: white">
-        <img src="https://i.imgur.com/fbdabHZ.png" alt="" style="display: block !important;width: 100% !important;">
+        <img src="https://i.imgur.com/VGtipqs.png" alt="" style="display: block !important;width: 100% !important;">
     </div>
   </div>
 </body>

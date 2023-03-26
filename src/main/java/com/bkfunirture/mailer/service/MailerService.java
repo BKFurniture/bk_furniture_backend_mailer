@@ -42,4 +42,25 @@ public class MailerService {
             return "Error mail signup";
         }
     }
+
+    public String design(String gmail,String userFullName,int numDay) {
+        try {
+            Template template = config.getTemplate("design.ftl");
+            Map<String, Object> model = new HashMap<>();
+            model.put("userFullName",userFullName);
+            model.put("numDay",numDay);
+            MimeMessage mimeMessage=javaMailSender.createMimeMessage();
+            MimeMessageHelper helper=new MimeMessageHelper(mimeMessage,"utf-8");
+            String htmlMsg= FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
+            helper.setText(htmlMsg, true); // Use this or above line.
+            helper.setTo(gmail);
+            helper.setSubject("Welcome to BKFurniture");
+            helper.setFrom(sender);
+            javaMailSender.send(mimeMessage);
+            return "Design success";
+        }
+        catch (Exception e){
+            return "Error mail design";
+        }
+    }
 }
