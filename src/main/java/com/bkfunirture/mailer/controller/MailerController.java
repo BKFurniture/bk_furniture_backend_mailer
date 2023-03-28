@@ -1,11 +1,11 @@
 package com.bkfunirture.mailer.controller;
 
+import com.bkfunirture.mailer.request.SaleRequest;
 import com.bkfunirture.mailer.service.MailerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "mailer/{gmail}/{userFullName}")
@@ -14,13 +14,20 @@ public class MailerController {
     MailerService mailService;
 
     @GetMapping("sign-up")
-    public String signUpSuccess(@PathVariable String gmail,@PathVariable String userFullName){
-        return mailService.signUpSuccess(gmail,userFullName);
+    public ResponseEntity<String> signUpSuccess(@PathVariable String gmail, @PathVariable String userFullName){
+        mailService.signUpSuccess(gmail,userFullName);
+        return new ResponseEntity<>("Mail signup success", HttpStatus.OK) ;
     }
     @GetMapping("design/{numDay}")
-    public String design(@PathVariable String gmail,@PathVariable String userFullName,@PathVariable int numDay){
-        return mailService.design(gmail,userFullName,numDay);
+    public ResponseEntity<String> design(@PathVariable String gmail,@PathVariable String userFullName,@PathVariable int numDay){
+        mailService.design(gmail,userFullName,numDay);
+        return new ResponseEntity<>("Mail design success", HttpStatus.OK) ;
     }
 
-//    @GetMapping("sale")
+    @PostMapping("sale")
+    public ResponseEntity<String> sale(@PathVariable String gmail, @PathVariable String userFullName, @RequestBody SaleRequest saleRequest){
+        mailService.sale(gmail,userFullName,saleRequest);
+        return new ResponseEntity<>("Mail sale success", HttpStatus.OK) ;
+    }
+
 }
