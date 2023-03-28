@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title th:remove="all">Template for HTML email</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body style="background-color: #C9ECFF;display: flex;-ms-flex-pack: center !important;justify-content: center;">
+<div style="  position: relative;width: 100%;margin-left:30%;flex: 0 0 41.666667%;max-width: 41.666667%;background-color: #fff !important;">
+  <img style="width: 100%;" src="https://i.imgur.com/fQMYzi2.png" alt="">
+  <div style="padding: 1rem !important;display: block !important;">
+    <p>
+      Hello, <span th:text="${userFullName}">Peter Static</span>!
+    </p>
+    <h2 th:text="${saleRequest.title}">
+
+    </h2>
+    <p th:text="${saleRequest.description}"></p>
+  </div>
+
+  <img style="width: 100% ;" th:src="${saleRequest.imgUrl}" alt="">
+  <div style="padding: 1rem;">
+
+  <div th:each="s : ${saleRequest.saleProduct}">
+    <div th:text="${s.name}"></div>
+    <img style="width:100%" th:src="${s.imgUrl}">
+    <div th:text="${s.dateString}" style="float:left"></div>
+    <div th:text="${s.salePercent}" style="float:right"></div>
+    <div th:text="${s.description}"></div>
+  </div>
+    <p>
+      Regards, <br/>
+      <em>The CodingNConcepts Team</em>
+    </p>
+  </div>
+</div>
+</body>
+</html>
