@@ -7,34 +7,47 @@
 <div style="  position: relative;width: 100%;margin-left:30%;flex: 0 0 41.666667%;max-width: 41.666667%;background-color: #fff !important;">
   <img style="width: 100%;" src="https://i.imgur.com/fQMYzi2.png" alt="">
   <div style="padding: 1rem !important;display: block !important;">
-    <p>
-      Hello, <span th:text="${userFullName}">Peter Static</span>!
-    </p>
-    <h2 th:text="${saleRequest.title}">
+    <div th:text="${'Hello '+userFullName+'!'}" style="font-weight: bold; font-size:20px"></div>
+    <div th:text="${saleRequest.title}" style="font-weight: bold; font-size:30px">
 
-    </h2>
+    </div>
     <p th:text="${saleRequest.description}"></p>
   </div>
 
   <img style="width: 100% ;" th:src="${saleRequest.imgUrl}" alt="">
   <div style="padding: 1rem;">
-    <form action="${urlSale}">
-      <input type="submit" value="Browse the Sale" />
-    </form>
-    <div>SAVE NOW ON THESE TOP 2 rECOMMENDATIONS JUST FOR YOU</div>
+<!--    <form style="text-align:center; cursor: pointer; padding: 5px 70px; background: #e5ff0870;" action="${urlSale}">-->
+<!--      <input type="submit" value="Browse the Sale" />-->
+<!--    </form>-->
+    <div style=" text-align:center; padding-bottom:5px">
+      <a th:href="${urlSale}" style="appearance: button; text-decoration: none;color: initial; padding: 5px 70px; background: #e5ff0870;">Browse the Sale</a>
+    </div>
+    <div th:text="${'SAVE NOW ON THESE TOP '+ #lists.size(saleRequest.saleProduct) + ' RECOMMENDATIONS JUST FOR YOU'}" style="font-weight: bold;"></div>
     <div th:each="s : ${saleRequest.saleProduct}">
       <div th:text="${s.name}"></div>
       <img style="width:100%" th:src="${s.imgUrl}">
-      <div th:text="${s.dateString}" style="float:left"></div>
-      <div th:text="${s.salePercent}" style="float:right"></div>
-      <div th:text="${s.salePercent}" style="float:right"></div>
-      <div th:text="${s.salePercent}" style="float:right"></div>
-      <div th:text="${s.description}"></div>
+      <div th:text="${'SPECIAL PROMOTION! Offer ends '+ s.dateString}" style="font-weight: bold;padding: 5px 0px; float:left"></div>
+      <div th:text="${'$'+s.newCost}" style="background-color: #66656e; color:white; padding: 5px 10px; float:right"></div>
+      <div th:text="${'$'+s.oldCost}" style="text-decoration: line-through; background-color: #66656e; color:#b5b1c9;padding: 5px 10px; float:right"></div>
+      <div th:text="${'-'+s.salePercent+'%'}" style="background-color: #259123; color:white; padding: 5px 10px; float:right"></div>
+      <div th:text="${s.description}" style="clear:both;padding-top: 10px; padding-bottom: 30px;"></div>
+    </div>
+    <div style=" text-align:center; padding-bottom:5px">
+      <a th:href="${url}" style="appearance: button; text-decoration: none;color: initial; padding: 5px 70px; background: #e5ff0870;">Shop Now</a>
     </div>
     <p>
-      Regards, <br/>
-      <em>The CodingNConcepts Team</em>
+      Specific pricing and discounts may be subject to change. Please check the Steam store page for details.
     </p>
+    <p>
+      You are receiving this email because the above items are highly recommended for you.
+    </p>
+    <p>
+      Best regards, <br/>
+      <em>BK Furniture</em>
+    </p>
+  </div>
+  <div style="background-color: white">
+    <img src="https://i.imgur.com/VGtipqs.png" alt="" style="display: block !important;width: 100% !important;">
   </div>
 </div>
 </body>

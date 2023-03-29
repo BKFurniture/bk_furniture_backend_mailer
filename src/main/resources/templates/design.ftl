@@ -27,10 +27,8 @@
                  Please do not hesitate to contact us if you have any questions or concerns regarding your project. We appreciate your business and look forward to working with you.
 			</p>
 			<p>
-			    Best regards,
-            </p>
-            <p>
-                BK Furniture
+			    Best regards, <br/>
+                <em>BK Furniture<em>
             </p>
 		</div>
 		<div style="background-color: #0795DF">
