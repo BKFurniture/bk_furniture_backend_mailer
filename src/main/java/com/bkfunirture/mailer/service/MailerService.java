@@ -38,6 +38,8 @@ public class MailerService {
     private String sender;
     @Value("${url}")
     private String url;
+    @Value("${urlSale}")
+    private String urlSale;
 
     public void signUpSuccess(String gmail, String userFullName) {
         try {
@@ -94,6 +96,7 @@ public class MailerService {
             model.put("userFullName", userFullName);
             model.put("saleRequest",saleRequest);
             model.put("dateFormat",dateFormat);
+            model.put("urlSale",urlSale);
 //            String date= dateFormat.format(saleRequest.getSaleProduct().get(0).getEndDate());
             saleRequest.getSaleProduct().forEach((s)->{
                 s.setDateString(dateFormat.format(s.getEndDate()));
