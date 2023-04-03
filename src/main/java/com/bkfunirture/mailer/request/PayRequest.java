@@ -15,7 +15,6 @@ public class PayRequest implements Serializable {
     private String phone;
     private String payMethod;
     private String shippingOption;
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private String deliveryDate;
     private List<PayProduct> payProducts;
     private double subTotal;

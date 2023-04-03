@@ -13,5 +13,5 @@ public class SaleRequest implements Serializable {
     private String title;
     private String imgUrl;
     private String description;
-    private List<SaleProduct> saleProduct;
+    private List<SaleProduct> saleProducts;
 }

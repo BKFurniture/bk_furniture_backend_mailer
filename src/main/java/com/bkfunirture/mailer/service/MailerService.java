@@ -83,10 +83,9 @@ public class MailerService {
             model.put("dateFormat",dateFormat);
             model.put("urlSale",urlSale);
             model.put("url",url);
-            saleRequest.getSaleProduct().forEach((s)->{
+            saleRequest.getSaleProducts().forEach((s)->{
                 s.setDateString(dateFormat.format(s.getEndDate()));
             });
-            System.out.println(saleRequest.getSaleProduct().get(0).getEndDate());
             context.setVariables(model);
             helper.setFrom(sender);
             helper.setTo(gmail);
@@ -104,18 +103,15 @@ public class MailerService {
             MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
             Context context = new Context();
             Map<String, Object> model = new HashMap<>();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM HH:mm");
             model.put("userFullName", userFullName);
             model.put("payRequest",payRequest);
-            System.out.println(payRequest.getDeliveryDate());
-            model.put("dateFormat",dateFormat);
             context.setVariables(model);
             helper.setFrom(sender);
             helper.setTo(gmail);
-            helper.setSubject("Sale");
-//            String html = springTemplateEngine.process("design.html", context);
-//            helper.setText(html, true);
-//            javaMailSender.send(message);
+            helper.setSubject("Checkout");
+            String html = springTemplateEngine.process("checkout.html", context);
+            helper.setText(html, true);
+            javaMailSender.send(message);
         } catch (Exception e) {
             return;
         }

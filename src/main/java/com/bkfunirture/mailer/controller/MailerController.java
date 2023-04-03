@@ -29,9 +29,4 @@ public class MailerController {
         mailService.sale(gmail,userFullName,saleRequest);
         return new ResponseEntity<>("Mail sale success", HttpStatus.OK) ;
     }
-    @PostMapping("checkout")
-    public ResponseEntity<String> checkout(@PathVariable String gmail, @PathVariable String userFullName, @RequestBody PayRequest payRequest){
-        mailService.checkout(gmail,userFullName,payRequest);
-        return new ResponseEntity<>("Mail checkout success", HttpStatus.OK) ;
-    }
 }
