@@ -4,7 +4,7 @@
 <head>
 	<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
 </head>
-<body style="background-color: #C9ECFF;display: flex;-ms-flex-pack: center !important;justify-content: center;">
+<body style="background-color: #C9ECFF;display: flex;-ms-flex-pack: center !important;justify-content: center;color:black">
 	<div style="  position: relative;width: 100%;margin-left:30%;flex: 0 0 41.666667%;max-width: 41.666667%;background-color: #fff !important;">
     <img style="display: block !important;width: 100% !important;" src="https://i.imgur.com/fQMYzi2.png" alt="">
 

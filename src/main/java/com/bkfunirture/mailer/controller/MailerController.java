@@ -1,5 +1,6 @@
 package com.bkfunirture.mailer.controller;
 
+import com.bkfunirture.mailer.request.DesignRequest;
 import com.bkfunirture.mailer.request.PayRequest;
 import com.bkfunirture.mailer.request.SaleRequest;
 import com.bkfunirture.mailer.service.MailerService;
@@ -19,14 +20,19 @@ public class MailerController {
         mailService.signUpSuccess(gmail,userFullName);
         return new ResponseEntity<>("Mail signup success", HttpStatus.OK) ;
     }
-    @GetMapping("design/{numDay}")
-    public ResponseEntity<String> design(@PathVariable String gmail,@PathVariable String userFullName,@PathVariable int numDay){
-        mailService.design(gmail,userFullName,numDay);
+    @PostMapping("design")
+    public ResponseEntity<String> design(@PathVariable String gmail, @PathVariable String userFullName, @RequestBody DesignRequest designRequest){
+        mailService.design(gmail,userFullName,designRequest);
         return new ResponseEntity<>("Mail design success", HttpStatus.OK) ;
     }
     @PostMapping("sale")
     public ResponseEntity<String> sale(@PathVariable String gmail, @PathVariable String userFullName, @RequestBody SaleRequest saleRequest){
         mailService.sale(gmail,userFullName,saleRequest);
         return new ResponseEntity<>("Mail sale success", HttpStatus.OK) ;
+    }
+    @PostMapping("checkout")
+    public ResponseEntity<String> checkout(@PathVariable String gmail, @PathVariable String userFullName, @RequestBody PayRequest payRequest){
+        mailService.checkout(gmail,userFullName,payRequest);
+        return new ResponseEntity<>("Mail checkout success", HttpStatus.OK) ;
     }
 }

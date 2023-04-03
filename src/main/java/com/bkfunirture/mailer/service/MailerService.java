@@ -1,5 +1,6 @@
 package com.bkfunirture.mailer.service;
 
+import com.bkfunirture.mailer.request.DesignRequest;
 import com.bkfunirture.mailer.request.PayRequest;
 import com.bkfunirture.mailer.request.SaleRequest;
 import freemarker.template.Configuration;
@@ -53,12 +54,13 @@ public class MailerService {
             return;
         }
     }
-    public void design(String gmail, String userFullName, int numDay) {
+    public void design(String gmail, String userFullName, DesignRequest designRequest) {
         try {
             Template template = config.getTemplate("design.ftl");
             Map<String, Object> model = new HashMap<>();
             model.put("userFullName", userFullName);
-            model.put("numDay", numDay);
+            model.put("numDay", 5);
+            model.put("designRequest", designRequest);
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
             String htmlMsg = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
