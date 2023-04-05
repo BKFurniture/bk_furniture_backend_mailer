@@ -1,20 +1,39 @@
 package com.bkfunirture.mailer.controller;
 
+import com.bkfunirture.mailer.request.DesignRequest;
+import com.bkfunirture.mailer.request.PayRequest;
+import com.bkfunirture.mailer.request.SaleRequest;
 import com.bkfunirture.mailer.service.MailerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = {"http://localhost:3000/","https://bk-furniture-frontend.vercel.app/"}, maxAge = 3600)
 @RestController
-@RequestMapping(path = "mailer")
+@RequestMapping(path = "mailer/")
 public class MailerController {
     @Autowired
     MailerService mailService;
 
-    @GetMapping("sign-up/{gmail}/{userFullName}")
-    public String signUpSuccess(@PathVariable String gmail,@PathVariable String userFullName){
-        return mailService.signUpSuccess(gmail,userFullName);
+    @GetMapping("{gmail}/{userFullName}/sign-up")
+    public ResponseEntity<String> signUpSuccess(@PathVariable String gmail, @PathVariable String userFullName){
+        mailService.signUpSuccess(gmail,userFullName);
+        return new ResponseEntity<>("Mail signup success", HttpStatus.OK) ;
+    }
+    @PostMapping("{gmail}/{userFullName}/design")
+    public ResponseEntity<String> design(@PathVariable String gmail, @PathVariable String userFullName, @RequestBody DesignRequest designRequest){
+        mailService.design(gmail,userFullName,designRequest);
+        return new ResponseEntity<>("Mail design success", HttpStatus.OK) ;
+    }
+    @PostMapping("sale")
+    public ResponseEntity<String> sale(@RequestBody SaleRequest saleRequest){
+        mailService.sale(saleRequest);
+        return new ResponseEntity<>("Mail sale success", HttpStatus.OK) ;
+    }
+    @PostMapping("{gmail}/{userFullName}/checkout")
+    public ResponseEntity<String> checkout(@PathVariable String gmail, @PathVariable String userFullName, @RequestBody PayRequest payRequest){
+        mailService.checkout(gmail,userFullName,payRequest);
+        return new ResponseEntity<>("Mail checkout success", HttpStatus.OK) ;
     }
 }

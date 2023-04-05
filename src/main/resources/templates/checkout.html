@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body style="background-color: #C9ECFF;display: flex;-ms-flex-pack: center !important;justify-content: center; color:black">
+<div style="  position: relative;width: 100%;margin-left:30%;flex: 0 0 41.666667%;max-width: 41.666667%;background-color: #fff !important;">
+  <img style="width: 100%;" src="https://i.imgur.com/fQMYzi2.png" alt="">
+  <div style="border-radius: 10px; margin: 0.5rem ;padding: 1rem ; background:#d1d1e4; overflow: auto">
+    <div class="text-danger" style="float:left">Address:</div>
+    <div style="float:right" th:text="${payRequest.address}"></div>
+    <div style="clear:both; float:left">Phone number:</div>
+    <div style="float:right" th:text="${payRequest.phone}"></div>
+    <div style="clear:both; float:left">Payment method:</div>
+    <div style="float:right" th:text="${payRequest.payMethod}"></div>
+    <div style="clear:both; float:left">Shipping option:</div>
+    <div style="float:right" th:text="${payRequest.shippingOption}"></div>
+    <div style="clear:both; float:left">Delivery date:</div>
+    <div style="float:right" th:text="${payRequest.deliveryDate}"></div>
+  </div>
+  <div style="border-radius: 10px; margin: 0.5rem ;padding: 1rem ; background:#d1d1e4; overflow: auto">
+
+    <div style="display:flex;">
+      <div style="display:inline-block; width:46%; font-weight: bold;" th:text="${'Products ordered ('+ #lists.size(payRequest.payProducts)+')'}"></div>
+      <div style="display:inline-block; width:18%; text-align:center;">Unit price</div>
+      <div style="display:inline-block; width:18%; text-align:center;">Quantity</div>
+      <div style="display:inline-block; width:18%; text-align:center;">Sub total</div>
+    </div>
+    <div style="border-bottom: 1px solid #73c2ec;border-top: 2px solid #73c2ec;">
+      <div th:each="s : ${payRequest.payProducts}" style="display:flex; padding:0.5rem">
+        <div style="display:inline-block; width:46%;">
+          <img style="width:35%; height:100%;float:left" src="https://i.imgur.com/fQMYzi2.png">
+          <div style="width:60%;float:right">
+            <div style="font-weight: bold;" th:text="${s.name}"></div>
+            <div th:text="${'Brand: '+s.brand}"></div>
+            <div th:text="${'Variation: '+ s.variation}"></div>
+          </div>
+        </div>
+        <div style="display:inline-block; width:18%; text-align:center;">
+          <div style="padding-top:33%" th:text="${'$'+s.unitPrice}"></div>
+        </div>
+        <div style="display:inline-block; width:18%; text-align:center;">
+          <div style="padding-top:33%" th:text="${s.quantity}"></div>
+        </div>
+        <div style="display:inline-block; width:18%; text-align:center;">
+          <div style="padding-top:33%" th:text="${'$'+s.subTotal}"></div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-left:auto;width:45%">
+      <div style="float:left; clear:both;font-weight:bold;">
+        Sub total
+      </div>
+      <div style="float: right;" th:text="${'$'+payRequest.subTotal}">
+      </div>
+      <div style="float:left; clear:both;font-weight:bold;">
+        Product discount
+      </div>
+      <div style="float: right;" th:text="${'$'+payRequest.productDiscount}">
+      </div>
+      <div style="float:left; clear:both;font-weight:bold;">
+        Shipping fee
+      </div>
+      <div style="float: right;" th:text="${'$'+payRequest.shippingFee}">
+      </div>
+      <div style="float:left; clear:both;font-weight:bold;">
+        Shipping discount
+      </div>
+      <div style="float: right;" th:text="${'$'+payRequest.shippingDiscount}">
+      </div>
+      <div style="float:left; clear:both;font-weight:bold;">
+        Total
+      </div>
+      <div style="float: right;display:inline-block;" th:text="${'$'+payRequest.total}">
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
