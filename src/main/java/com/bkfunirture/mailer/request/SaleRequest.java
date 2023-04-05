@@ -14,4 +14,5 @@ public class SaleRequest implements Serializable {
     private String imgUrl;
     private String description;
     private List<SaleProduct> saleProducts;
+    private String[] userMails;
 }

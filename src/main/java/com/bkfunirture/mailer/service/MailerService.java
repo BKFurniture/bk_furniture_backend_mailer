@@ -56,31 +56,32 @@ public class MailerService {
     }
     public void design(String gmail, String userFullName, DesignRequest designRequest) {
         try {
-            Template template = config.getTemplate("design.ftl");
-            Map<String, Object> model = new HashMap<>();
-            model.put("userFullName", userFullName);
-            model.put("numDay", 5);
-            model.put("designRequest", designRequest);
-            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
-            String htmlMsg = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
-            helper.setText(htmlMsg, true);
-            helper.setTo(gmail);
-            helper.setSubject("Receipt of acknowledgment for received design");
-            helper.setFrom(sender);
-            javaMailSender.send(mimeMessage);
-        } catch (Exception e) {
-            return;
-        }
-    }
-    public void sale(String gmail, String userFullName, SaleRequest saleRequest) {
-        try {
             MimeMessage message = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
             Context context = new Context();
             Map<String, Object> model = new HashMap<>();
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM HH:mm");
             model.put("userFullName", userFullName);
+            model.put("numDay", 5);
+            model.put("designRequest", designRequest);
+            context.setVariables(model);
+            helper.setFrom(sender);
+            helper.setTo(gmail);
+            helper.setSubject("Receipt of acknowledgment for received design");
+            String html = springTemplateEngine.process("design.html", context);
+            helper.setText(html, true);
+            javaMailSender.send(message);
+        } catch (Exception e) {
+            return;
+        }
+    }
+    public void sale(SaleRequest saleRequest) {
+        try {
+            MimeMessage message = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
+            Context context = new Context();
+            Map<String, Object> model = new HashMap<>();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM HH:mm");
             model.put("saleRequest",saleRequest);
             model.put("dateFormat",dateFormat);
             model.put("urlSale",urlSale);
@@ -90,8 +91,8 @@ public class MailerService {
             });
             context.setVariables(model);
             helper.setFrom(sender);
-            helper.setTo(gmail);
-            helper.setSubject("Sale");
+            helper.setTo(saleRequest.getUserMails());
+            helper.setSubject("Exclusive Offer: Get special discount with purchase today!");
             String html = springTemplateEngine.process("sale.html", context);
             helper.setText(html, true);
             javaMailSender.send(message);
@@ -110,7 +111,7 @@ public class MailerService {
             context.setVariables(model);
             helper.setFrom(sender);
             helper.setTo(gmail);
-            helper.setSubject("Checkout");
+            helper.setSubject("Order Confirmation: Payment Successfully Processed for Your Purchase");
             String html = springTemplateEngine.process("checkout.html", context);
             helper.setText(html, true);
             javaMailSender.send(message);
