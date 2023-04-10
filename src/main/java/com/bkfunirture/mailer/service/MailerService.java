@@ -35,6 +35,10 @@ public class MailerService {
     private String url;
     @Value("${urlSale}")
     private String urlSale;
+    @Value("${headerImgUrl}")
+    private String headerImgUrl;
+    @Value("${footerImgUrl}")
+    private String footerImgUrl;
 
     public void signUpSuccess(String gmail, String userFullName) {
         try {
@@ -42,6 +46,8 @@ public class MailerService {
             Map<String, Object> model = new HashMap<>();
             model.put("userFullName", userFullName);
             model.put("url", url);
+            model.put("headerImgUrl", headerImgUrl);
+            model.put("footerImgUrl", footerImgUrl);
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
             String htmlMsg = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
@@ -64,6 +70,8 @@ public class MailerService {
             model.put("userFullName", userFullName);
             model.put("numDay", 5);
             model.put("designRequest", designRequest);
+            model.put("headerImgUrl", headerImgUrl);
+            model.put("footerImgUrl", footerImgUrl);
             context.setVariables(model);
             helper.setFrom(sender);
             helper.setTo(gmail);
@@ -86,6 +94,8 @@ public class MailerService {
             model.put("dateFormat",dateFormat);
             model.put("urlSale",urlSale);
             model.put("url",url);
+            model.put("headerImgUrl", headerImgUrl);
+            model.put("footerImgUrl", footerImgUrl);
             saleRequest.getSaleProducts().forEach((s)->{
                 s.setDateString(dateFormat.format(s.getEndDate()));
             });
@@ -108,6 +118,8 @@ public class MailerService {
             Map<String, Object> model = new HashMap<>();
             model.put("userFullName", userFullName);
             model.put("payRequest",payRequest);
+            model.put("headerImgUrl", headerImgUrl);
+            model.put("footerImgUrl", footerImgUrl);
             context.setVariables(model);
             helper.setFrom(sender);
             helper.setTo(gmail);
