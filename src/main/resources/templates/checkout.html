@@ -7,7 +7,16 @@
 <body style="background-color: #C9ECFF;display: flex;-ms-flex-pack: center !important;justify-content: center; color:black">
 <div style="  position: relative;width: 100%;margin-left:30%;flex: 0 0 41.666667%;max-width: 41.666667%;background-color: #fff !important;">
   <img style="width: 100%;" th:src="${headerImgUrl}" alt="">
-  <div style="border-radius: 10px; margin: 0.5rem ;padding: 1rem ; background:#d8efdf; overflow: auto">
+  <div style="padding: 1rem !important;display: block !important;">
+    <h3 th:text="${'Dear, '+userFullName}" style="margin-top:0;">
+    </h3>
+    <div>
+      Thanks for shopping with us. We hope that our products were everything you hoped for and more.
+    <p>
+      We attached your order below so you can check it again easily.
+    </p>
+    </div>
+  <div style="border-radius: 10px; margin: 0.5rem ;padding: 1rem ; background:#e2f5ff; overflow: auto">
     <div class="text-danger" style="float:left">Address:</div>
     <div style="float:right" th:text="${payRequest.address}"></div>
     <div style="clear:both; float:left">Phone number:</div>
@@ -19,7 +28,7 @@
     <div style="clear:both; float:left">Delivery date:</div>
     <div style="float:right" th:text="${payRequest.deliveryDate}"></div>
   </div>
-  <div style="border-radius: 10px; margin: 0.5rem ;padding: 1rem ; background:#d8efdf; overflow: auto">
+  <div style="border-radius: 10px; margin: 0.5rem ;padding: 1rem ; background:#e2f5ff; overflow: auto">
 
     <div style="display:flex;">
       <div style="display:inline-block; width:46%; font-weight: bold;" th:text="${'Products ordered ('+ #lists.size(payRequest.payProducts)+')'}"></div>
@@ -76,6 +85,10 @@
       </div>
     </div>
   </div>
+    <div>
+      If you have any questions or concerns, please reach out to us and we’d be more than happy to help. Have a great day, <br/>
+      BK Furniture
+    </div>
   <div style="background-color: #0795DF">
     <img th:src="${footerImgUrl}" alt="" style="display: block !important;width: 100% !important;">
   </div>
