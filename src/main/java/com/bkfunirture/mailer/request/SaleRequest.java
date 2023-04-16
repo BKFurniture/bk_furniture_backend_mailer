@@ -10,9 +10,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class SaleRequest implements Serializable {
-    private String title;
-    private String imgUrl;
-    private String description;
-    private List<SaleProduct> saleProducts;
+    private double discountPercentage;
+    private String discountCode;
+    private int usageLimit;
     private String[] userMails;
 }

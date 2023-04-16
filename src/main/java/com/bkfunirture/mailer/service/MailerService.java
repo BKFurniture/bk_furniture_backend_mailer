@@ -91,18 +91,12 @@ public class MailerService {
             Map<String, Object> model = new HashMap<>();
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM HH:mm");
             model.put("saleRequest",saleRequest);
-            model.put("dateFormat",dateFormat);
-            model.put("urlSale",urlSale);
-            model.put("url",url);
             model.put("headerImgUrl", headerImgUrl);
             model.put("footerImgUrl", footerImgUrl);
-            saleRequest.getSaleProducts().forEach((s)->{
-                s.setDateString(dateFormat.format(s.getEndDate()));
-            });
             context.setVariables(model);
             helper.setFrom(sender);
             helper.setTo(saleRequest.getUserMails());
-            helper.setSubject("Exclusive Offer: Get special discount with purchase today!");
+            helper.setSubject("Special discount code: "+saleRequest.getDiscountPercentage()+"% off!");
             String html = springTemplateEngine.process("sale.html", context);
             helper.setText(html, true);
             javaMailSender.send(message);

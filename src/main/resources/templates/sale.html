@@ -3,37 +3,19 @@
   <title th:remove="all">Template for HTML email</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
-<body style="color:black;background-color: #C9ECFF;display: flex;-ms-flex-pack: center !important;justify-content: center;">
+<body style="color:black;background-color: #C9ECFF;display: flex;-ms-flex-pack: center !important;justify-content: center; color:black">
 <div style="  position: relative;width: 100%;margin-left:30%;flex: 0 0 41.666667%;max-width: 41.666667%;background-color: #fff !important;">
   <img style="width: 100%;" th:src="${headerImgUrl}" alt="">
-  <div style="padding: 1rem !important;display: block !important;">
-    <div th:text="${saleRequest.title}" style="font-weight: bold; font-size:30px"></div>
-    <p th:text="${saleRequest.description}"></p>
-  </div>
-  <img style="width: 100% ;" th:src="${saleRequest.imgUrl}" alt="">
+  <img style="width: 100% ;" src="https://hc.com.vn/i/ecommerce/media/ckeditor_2925202.jpg" alt="">
   <div style="padding: 1rem;">
-    <div style=" text-align:center; padding-bottom:5px">
-      <a th:href="${urlSale}" style="appearance: button; text-decoration: none;color: initial; padding: 5px 70px; background: #e5ff0870;">Browse the Sale</a>
-    </div>
-    <div th:text="${'SAVE NOW ON THESE TOP '+ #lists.size(saleRequest.saleProducts) + ' RECOMMENDATIONS JUST FOR YOU'}" style="font-weight: bold;"></div>
-    <div th:each="s : ${saleRequest.saleProducts}">
-      <div style="font-size:15px" th:text="${s.name}"></div>
-      <img style="width:100%" th:src="${s.imgUrl}">
-      <div th:text="${'$'+s.newCost}" style="background-color: #66656e; color:white; text-align:center; float:right;padding: 0px 5px"></div>
-      <div th:text="${'$'+s.oldCost}" style="text-decoration: line-through; background-color: #66656e; color:#b5b1c9; text-align:center; float:right;padding: 0px 5px"></div>
-      <div th:text="${'-'+s.salePercent+'%'}" style="background-color: #259123; color:white; text-align:center; float:right;padding: 0px 5px"></div>
-      <div th:text="${'SPECIAL PROMOTION! Offer ends '+ s.dateString}" style="font-weight: bold;"></div>
-      <div th:text="${s.description}" style="clear:both;padding-top: 10px; padding-bottom: 30px;"></div>
-    </div>
-    <div style=" text-align:center; padding-bottom:5px">
-      <a th:href="${url}" style="appearance: button; text-decoration: none;color: initial; padding: 5px 70px; background: #e5ff0870;">Shop Now</a>
-    </div>
+    <p th:text="${'Your discount voucher in code: '+saleRequest.discountCode}"></p>
+    <p>----------------------</p>
+    <p th:text="${'We are writing to extend our heartfelt congratulations to you for receiving a discount voucher. It is always an amazing feeling to save money, and we are sure this voucher will come in handy for you. You will get a '+saleRequest.discountPercentage+'% discount for your next purchase with this code. Just use it as soon as possible, because it can be expired if reaching '+saleRequest.usageLimit+' usages.'}"></p>
     <p>
-      Specific pricing and discounts may be subject to change. Please check the Steam store page for details.
-    </p>
-    <p>
-      You are receiving this email because the above items are highly recommended for you.
-    </p>
+    We hope you will be able to use this voucher to purchase the products you need at a reduced cost. It's always great to get a good deal, and we are happy that you were able to receive this opportunity.
+      <br/>
+      If you have any questions about redeeming the voucher or any concerns, do not hesitate to contact us. We are always here to help you out.
+      </p>
     <p>
       Best regards, <br/>
       <em>BK Furniture</em>
