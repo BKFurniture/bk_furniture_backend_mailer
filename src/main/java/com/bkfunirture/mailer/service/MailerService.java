@@ -31,10 +31,8 @@ public class MailerService {
     private Configuration config;
     @Value("${spring.mail.username}")
     private String sender;
-    @Value("${url}")
-    private String url;
-    @Value("${urlSale}")
-    private String urlSale;
+    @Value("${urlSignIn}")
+    private String urlSignIn;
     @Value("${headerImgUrl}")
     private String headerImgUrl;
     @Value("${footerImgUrl}")
@@ -45,7 +43,7 @@ public class MailerService {
             Template template = config.getTemplate("sign-up.ftl");
             Map<String, Object> model = new HashMap<>();
             model.put("userFullName", userFullName);
-            model.put("url", url);
+            model.put("urlSignIn", urlSignIn);
             model.put("headerImgUrl", headerImgUrl);
             model.put("footerImgUrl", footerImgUrl);
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();

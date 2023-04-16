@@ -14,7 +14,7 @@
         </h3>
       <p>
         You have successfully signed up. To login to the site, just follow this link:
-        <a href="${url}">BK Furniture</a>
+        <a href="${urlSignIn}">BK Furniture</a>
       <br/>
         Thanks for joining and have a great day!
       <br/><br/>
