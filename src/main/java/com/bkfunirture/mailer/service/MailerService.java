@@ -93,7 +93,7 @@ public class MailerService {
             model.put("footerImgUrl", footerImgUrl);
             context.setVariables(model);
             helper.setFrom(sender);
-            helper.setTo(saleRequest.getUserMails());
+            helper.setBcc(saleRequest.getUserMails());
             helper.setSubject("Special discount code: "+saleRequest.getDiscountPercentage()+"% off!");
             String html = springTemplateEngine.process("sale.html", context);
             helper.setText(html, true);
