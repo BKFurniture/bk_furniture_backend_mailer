@@ -7,8 +7,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class PayProduct {
     private String name;
-    private String brand;
-    private String variation;
+    private String color;
+    private String size;
     private String imgUrl;
     private double unitPrice;
     private int quantity;
